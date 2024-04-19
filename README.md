@@ -5,3 +5,8 @@ Hedef İp adresinin ssh portunu (22) tarar. Eğer port açıksa sizden username 
 
 # 🇬🇧
 It scans the ssh port (22) of the target IP address. If the port is open, a Brute Force attack is applied using your username and password word lists. Please note that most startups hosted by the SSH server will have monitoring for any interruption of this script.
+
+
+
+https://www.instagram.com/rootramo?igsh=c2ptcHhjZGRnMGV2
+
